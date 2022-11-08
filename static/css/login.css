@@ -34,7 +34,8 @@ img{
 }
 
 button[type="submit"]{
-    color: white !important
+    width: 80% !important;
+    color: white !important;
 }
 
 /* test */
