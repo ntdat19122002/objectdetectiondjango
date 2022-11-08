@@ -7,21 +7,21 @@ app_name = 'users'
 
 urlpatterns = [
     ########### User Account #############
-    path('register/',
-         views.register,
+     path('register/',
+         views.RegistrationView.as_view(),
          name='register'
-         ),
-
-    path('profile/',
+     ),
+     path('activate/<uidb64>/<token>',views.VerificationView.as_view(),name="activate"),
+     path('profile/',
          views.profile,
          name='profile'
-         ),
+     ),
 
-    path('registration_under_approval/',
-         views.RegistrationUnderApproval.as_view(
+     path('registration_under_approval/',
+          views.RegistrationUnderApproval.as_view(
              template_name='users/registration_under_approval.html'),
-         name='registration_under_approval_url'
-         ),
+          name='registration_under_approval_url'
+     ),
 
     path('login/',
          auth_views.LoginView.as_view(template_name='users/login.html'),

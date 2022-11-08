@@ -4,15 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
 
-
-class Organization(models.TextChoices):
-    A = 'A', _("A")
-    B = 'B', _("B")
-
-
 class CustomUser(AbstractUser):
-    orig_name = models.CharField(
-        choices=Organization.choices, max_length=2)
     age = models.PositiveIntegerField(null=True, blank=True)
     gender = models.CharField(max_length=21, null=True, blank=True)
 
