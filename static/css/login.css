@@ -34,7 +34,8 @@ img{
 }
 
 button[type="submit"]{
-    width: 80% !important;
+    margin-top: 10px;
+    width: 100% !important;
     color: white !important;
 }
 
