@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "login_layout.html" %}
 {% load crispy_forms_tags %}
 
 {% block title %}
@@ -12,25 +12,26 @@
 {% endblock leftbar %}
 
 {% block content %}
-<div class="col-sm-7">
-    <div class="content">
-        <div class="card">
+<div class="form-container row d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="card" style="border-radius: 15px;">
             <div class="card-body">
+                <h2 class="text-uppercase text-center mb-5">Share your beauty!</h2>
                 <form method="POST">
                     {% csrf_token %}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">Register</legend>
                         {{ form|crispy }}
                     </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-sm btn-outline-info mt-2" type="submit">Sign Up</button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-info btn-block btn-lg gradient-custom-4 text-body">Register</button>
                     </div>
                 </form>
-                <div class="border-top pt-3">
-                    <small class="text-muted">
-                        Already Have An Account? <a class="ml-2" href="{% url 'users:login' %}">Sign In</a>
-                    </small>
-                </div>
+                
+                <p class="text-center text-muted mt-5 mb-0">
+                    Have already an account? <a href="{% url 'users:login' %}" class="fw-bold text-body"><u>Login here</u></a>
+                </p>
+
             </div>
         </div>
     </div>
