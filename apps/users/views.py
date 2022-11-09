@@ -45,7 +45,7 @@ class RegistrationView(View):
                     
                     uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
                     domain = get_current_site(request).domain
-                    link = reverse('activate',kwargs={'uidb64':uidb64,'token':token_generator.make_token(user)})
+                    link = reverse('users:activate',kwargs={'uidb64':uidb64,'token':token_generator.make_token(user)})
                     active_url = 'http://'+domain+link     
                     email_subject = 'Active your account'
                     email_body = f'Hi {user.username}. Please use this link to verify your account\n'+active_url
@@ -57,7 +57,7 @@ class RegistrationView(View):
                     )
 
                     email.send(fail_silently=True)     
-                    return redirect('dashboard')
+                    return redirect('users:registration_under_approval_url')
         return render(request,'users/register.html',context)
 
 class VerificationView(View):
@@ -69,10 +69,10 @@ class VerificationView(View):
             if not token_generator.check_token(user, token):
                 return redirect('login'+'?message='+'User already activate')
             if user.is_active:
-                return redirect('dashboard')
+                return redirect('users:registration_under_approval_url')
             user.is_active = True
             user.save()
-            return redirect('dashboard')
+            return redirect('users:registration_under_approval_url')
         except:
             pass
         return redirect('login')
