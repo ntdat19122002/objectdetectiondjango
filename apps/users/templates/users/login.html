@@ -20,8 +20,8 @@ Log In
                 <form action="{% url 'users:login'%}" method="POST">
                 {% csrf_token %}
                 <div class="form-outline mb-2">
-                    <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                    <input type="text" name="username" id="form3Example3cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example3cg">Your Username</label>
                 </div>
 
                 <div class="form-outline mb-2">

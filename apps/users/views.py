@@ -90,11 +90,11 @@ class LoginView(View):
         return render(request,'users/login.html')
 
     def post(self,request):
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST['password']
 
-        if email and password:
-            user = auth.authenticate(email = email, password = password)
+        if username and password:
+            user = auth.authenticate(username = username, password = password)
             if user:
                 if user.is_active:
                     auth.login(request,user)
