@@ -63,19 +63,21 @@ class RegistrationView(View):
 class VerificationView(View):
     def get(self,request,uidb64,token):
         try:
-            id = force_str(urlsafe_base64_decode)
+            id = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=id)
-
+            
             if not token_generator.check_token(user, token):
-                return redirect('login'+'?message='+'User already activate')
+                return redirect('users:login'+'?message='+'User already activate')
+            
             if user.is_active:
                 return redirect('users:registration_under_approval_url')
+               
             user.is_active = True
             user.save()
-            return redirect('users:registration_under_approval_url')
+            return redirect('users:register') 
         except:
             pass
-        return redirect('login')
+        return redirect('users:login')
 
 class RegistrationUnderApproval(TemplateView):
     def get_context_data(self, **kwargs):
@@ -83,6 +85,21 @@ class RegistrationUnderApproval(TemplateView):
         # Do something here!
         return context
 
+class LoginView(View):
+    def get(self,request):
+        return render(request,'users/login.html')
+
+    def post(self,request):
+        email = request.POST.get('email')
+        password = request.POST['password']
+
+        if email and password:
+            user = auth.authenticate(email = email, password = password)
+            if user:
+                if user.is_active:
+                    auth.login(request,user)
+                    return redirect('users:registration_under_approval_url')
+        return redirect('users:register')
 
 @login_required
 def profile(request):
