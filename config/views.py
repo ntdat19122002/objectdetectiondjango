@@ -14,4 +14,5 @@ class HomeTemplateView(LoginRequiredMixin, TemplateView):
         public_imagesets = ImageSet.objects.filter(public=True)
         context["user_imagesets"] = user_imagesets
         context["public_imagesets"] = public_imagesets
+        context["check_home"] = True
         return context

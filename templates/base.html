@@ -12,9 +12,8 @@
     <link href="{% static 'css/ekko-lightbox.css' %}" rel="stylesheet">
   {% endblock vendor_css %}
 
-  {% block site_css %}
-    <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/styles/style.css' %}" />
-  {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}" >
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" >
 
   {# Page-specific styles #}
   {% block on_page_css %}{% endblock %}
@@ -29,11 +28,13 @@
   {% include 'partials/_nav.html' %}
 
   {{ form.image.errors }}
-<div class="fluid-container mx-2">
-    
+  
   {% block header %}
     {% include 'partials/_header.html' %}
   {% endblock header %}
+<div class="fluid-container mx-2">
+    
+  
 
 
   {% if messages %}
